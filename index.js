@@ -14,9 +14,9 @@ app.get('/', (req, res) => {
 
 app.post('/bfhl',(req,res)=>{
     const {data}=req.body;
-    const even=data.filter((num)=>typeof num=='number' && num%2==0);
-    const odd=data.filter((num)=>typeof num=='number' && num%2==1);
-    const alpha=data.filter((num)=>typeof num=='string');
+    const even=data.filter((num)=>typeof parseInt(num)==='number' && parseInt(num)%2===0);
+    const odd=data.filter((num)=>typeof parseInt(num)==='number' && parseInt(num)%2===1);
+    const alpha=data.filter((num)=>typeof num==='string' && parseInt(num)==NaN);
     const upper=alpha.map((al)=>al.toUpperCase());
     res.json({
         is_success: true,
