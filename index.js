@@ -13,10 +13,12 @@ app.get('/', (req, res) => {
 });
 
 app.post('/bfhl',(req,res)=>{
+    try{
+    console.log(req.body)
     const {data}=req.body;
     const even=data.filter((num)=>typeof parseInt(num)==='number' && parseInt(num)%2===0);
     const odd=data.filter((num)=>typeof parseInt(num)==='number' && parseInt(num)%2===1);
-    const alpha=data.filter((num)=>typeof num==='string' && parseInt(num)===NaN);
+    const alpha=data.filter((num)=>typeof num==='string' && isNaN(parseInt(num)));
     const upper=alpha.map((al)=>al.toUpperCase());
     res.json({
         is_success: true,
@@ -26,11 +28,12 @@ app.post('/bfhl',(req,res)=>{
         odd_numbers: odd,
         even_numbers: even,
         alphabets: upper
-    }).status(200);
-
-
+    }).status(200);}
+    catch(err){
+        res.json({is_success: false,}).status(400);
+}
 })
 
 app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+    console.log(`Server listening at ${port}`);
 });
