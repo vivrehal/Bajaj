@@ -3,6 +3,7 @@ const cors = require('cors');
 
 
 const app = express();
+app.use(express.json());
 const port = 3000;
 app.use(cors({
     origin: '*',
@@ -33,6 +34,8 @@ app.post('/bfhl',(req,res)=>{
         res.json({is_success: false,}).status(400);
 }
 })
+
+
 
 app.listen(port, () => {
     console.log(`Server listening at ${port}`);
